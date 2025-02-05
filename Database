@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace My_Mark
+{
+    public partial class My_Mark : System.Web.UI.Page
+    {
+        SqlCommand cmd;
+        SqlConnection con;
+        string query;
+
+        public void dbconn()
+        {
+            string conn = System.Configuration.ConfigurationManager.ConnectionStrings["Mark"].ToString();
+            con = new SqlConnection(conn);
+            con.Open();
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btn_save_Click(object sender, EventArgs e)
+        {
+            dbconn();
+            query = "insert into semester1(Name,Subject1,Subject2,Subject3,Subject4,Subject5)values('" + txt_name.Text  + "','" + txt_sub1.Text + "','" + txt_sub2.Text + "','" + txt_sub3.Text + "','" + txt_sub4.Text + "','" + txt_sub5.Text + "')";
+            cmd = new SqlCommand(query, con);
+            cmd.ExecuteNonQuery();
+            Response.Write("<script>alert('data saved')</script>");
+        }
+
+        protected void btn_view_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        protected void grid_view_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlDataReader rd;
+            SqlDataAdapter adap;
+            DataTable dt;
+
+            dbconn();
+            query = "select *from semester1";
+            cmd = new SqlCommand(query, con);
+            adap = new SqlDataAdapter(cmd);
+            dt = new DataTable();
+            adap.Fill(dt);
+            grid_view.DataSource = dt;
+            grid_view.DataBind();
+        }
+    }
+}
