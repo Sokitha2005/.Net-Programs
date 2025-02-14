@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Traffic_Control
+{
+    public partial class Form1 : Form
+    {
+        public int count = 10;
+        public int a;
+        public Form1()
+        {
+            InitializeComponent();
+            a = 1;
+            pictureBox1.Visible = true;
+            pictureBox2.Visible = false;
+            pictureBox3.Visible = false;
+            textBox1.Text = "Turn off your engine";
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (a == 1)
+            {
+                count = 10;
+                pictureBox1.Visible = false;
+                pictureBox2.Visible = false;
+                pictureBox3.Visible = true;
+                textBox1.Text = "Have a safe journey";
+                timer1.Interval = 1000;
+                a = 2;
+            }
+            else if (a == 2)
+            {
+                count = 10;
+                pictureBox1.Visible = false;
+                pictureBox2.Visible = true;
+                pictureBox3.Visible = false;
+                textBox1.Text = "slow down your vechicle";
+                timer1.Interval = 1000;
+                a = 3;
+            }
+            else if (a == 3)
+            {
+                count = 10;
+                pictureBox1.Visible = true;
+                pictureBox2.Visible = false;
+                pictureBox3.Visible = false;
+                textBox1.Text = "stop your vechicle";
+                timer1.Interval = 1000;
+                a = 1;
+            }
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            label.Text = count.ToString();
+            count = count - 1;
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
