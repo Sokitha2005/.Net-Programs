@@ -22,10 +22,10 @@ namespace WindowsFormsApp1
         {
             try
             {
-                int numerator = Convert.ToInt32(textBox4.Text);
-                int denominator = Convert.ToInt32(textBox5.Text);
+                int numerator = Convert.ToInt32(textBox1.Text);
+                int denominator = Convert.ToInt32(textBox2.Text);
                 int Answer = numerator / denominator;
-                textBox6.Text = Answer.ToString();
+                textBox3.Text = Answer.ToString();
             }
             catch (FormatException)
             {
@@ -37,8 +37,8 @@ namespace WindowsFormsApp1
             }
             finally
             {
-                textBox4.Text = "";
-                textBox5.Text = "";
+                textBox1.Text = "";
+                textBox2.Text = "";
             }
         }
 
@@ -49,8 +49,8 @@ namespace WindowsFormsApp1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            var WebForm1 = new WebForm1();
-            WebForm1.Show();
+            var Form1 = new Form1();
+            Form1.Show();
             this.Hide();
         }
     }
