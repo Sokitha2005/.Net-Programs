@@ -8,66 +8,93 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Traffic_Control
+namespace Traffic_Control1
 {
     public partial class Form1 : Form
     {
-        public int count = 10;
-        public int a;
         public Form1()
         {
             InitializeComponent();
-            a = 1;
-            pictureBox1.Visible = true;
-            pictureBox2.Visible = false;
-            pictureBox3.Visible = false;
-            textBox1.Text = "Turn off your engine";
+            red.Visible = true;
+            yellow.Visible = false;
+            green.Visible = false;
         }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (a == 1)
+            if (red.Visible == true)
             {
-                count = 10;
-                pictureBox1.Visible = false;
-                pictureBox2.Visible = false;
-                pictureBox3.Visible = true;
+                red.Visible = false;
+                yellow.Visible = false;
+                green.Visible = true;
                 textBox1.Text = "Have a safe journey";
-                timer1.Interval = 1000;
-                a = 2;
+                timerred.Enabled = true;
+
             }
-            else if (a == 2)
+            else if (green.Visible == true)
             {
-                count = 10;
-                pictureBox1.Visible = false;
-                pictureBox2.Visible = true;
-                pictureBox3.Visible = false;
-                textBox1.Text = "slow down your vechicle";
-                timer1.Interval = 1000;
-                a = 3;
+                red.Visible = false;
+                yellow.Visible = true;
+                green.Visible = false;
+                textBox1.Text = "slow down your vehicle";
+                timeryellow.Enabled = true;
             }
-            else if (a == 3)
+            else if (yellow.Visible == true)
             {
-                count = 10;
-                pictureBox1.Visible = true;
-                pictureBox2.Visible = false;
-                pictureBox3.Visible = false;
-                textBox1.Text = "stop your vechicle";
-                timer1.Interval = 1000;
-                a = 1;
+                red.Visible = true;
+                yellow.Visible = false;
+                green.Visible = false;
+                textBox1.Text = "stop your vehicle";
+                timergreen.Enabled = true;
             }
-        }
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            label.Text = count.ToString();
-            count = count - 1;
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
         }
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timerred.Enabled = true;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timerred.Enabled = false;
+            timeryellow.Enabled = false;
+            timergreen.Enabled = false;
+
+            red.Visible = true;
+            yellow.Visible = false;
+            green.Visible = false;
+            textBox1.Text = "Stop your vehicle";
+
+        }
+
+        private void timerred_Tick(object sender, EventArgs e)
+        {
+            timerred.Enabled = false;
+            timer1_Tick(sender, e);
+        }
+
+        private void timeryellow_Tick(object sender, EventArgs e)
+        {
+            timeryellow.Enabled = false;
+            timer1_Tick(sender, e);
+
+        }
+
+        private void timergreen_Tick(object sender, EventArgs e)
+        {
+            timergreen.Enabled = false;
+            timer1_Tick(sender, e);
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+        private void ClearInputs()
+        {
+            textBox1.Clear();
         }
     }
 }
